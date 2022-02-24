@@ -9,16 +9,25 @@ Note: This is a PR of the original mattermost docker project (https://github.com
 4. Restart containers
 5. Go to http://localhost:8065 in a browser
 
-###################
-https://docs.mattermost.com/install/trouble_mysql.html
+
+Additional Firewall notes to consider: https://docs.mattermost.com/install/trouble_mysql.html
+
+1. Start containers
 ```
 #add settings to container scripts
 sudo chmod 755 up.sh
 sudo chmod 755 down.sh
 
 # Start mattermost/mariadb container
-./up
-
+# Note: up.sh and down.sh contain the nginx and non-nginx variaints
+./up.sh
+```
+2. create directories for mounting volumes makedirectories.sh
+```
+./makedirectories.sh
+```
+3. Go into mariadb container and create `mattermost` database, create `mmuser` user and give permissions
+```
 # Note: Now we need to create the mattermost DB and create users. This is done the first time: 
 bash> docker ps -a
 bash> docker exec --it {mariacontainer} mysql
@@ -69,5 +78,12 @@ grant all privileges on mattermost.* to 'mmuser'@'%';
 
 exit
 ```
+
+4. Restart containers
+```
+./down.sh
+./up.sh
+```
+
 Other notes: May consider forwarding firewall
 https://mariadb.com/kb/en/configuring-mariadb-for-remote-client-access/
