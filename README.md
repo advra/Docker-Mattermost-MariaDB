@@ -12,6 +12,8 @@ Note: This is a PR of the original mattermost docker project (https://github.com
 
 Some notes ref mysql for mariadb: https://docs.mattermost.com/install/trouble_mysql.html
 
+
+## Notes Detailed
 1. Start containers
 ```
 #add settings to container scripts
@@ -84,6 +86,7 @@ exit
 ./down.sh
 ./up.sh
 ```
-
-Other notes: May consider forwarding firewall
-https://mariadb.com/kb/en/configuring-mariadb-for-remote-client-access/
+## Other Thoughts
+- May consider forwarding firewall check out https://mariadb.com/kb/en/configuring-mariadb-for-remote-client-access/
+- Disabling Https for internal orgs without need of SSL check out https://github.com/mattermost/docker/issues/87
+- LDAP is enterprise edition but can opt for gitlab for SSO
