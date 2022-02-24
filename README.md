@@ -10,7 +10,7 @@ Note: This is a PR of the original mattermost docker project (https://github.com
 5. Go to http://localhost:8065 in a browser
 
 
-Additional Firewall notes to consider: https://docs.mattermost.com/install/trouble_mysql.html
+Some notes ref mysql for mariadb: https://docs.mattermost.com/install/trouble_mysql.html
 
 1. Start containers
 ```
