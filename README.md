@@ -30,9 +30,9 @@ sudo chmod 755 down.sh
 ```
 # Note: Now we need to create the mattermost DB and create users. This is done the first time: 
 bash> docker ps -a
-bash> docker exec --it {mariacontainer} mysql
 # run mysql as root
-bash> mysql -u root -p
+bash> docker exec -it mariadb_mattermost mysql -u root -p
+# if using default passwords in config pass is r00t
 mysql> SHOW DATABASES;
 +--------------------+
 | Database           |
@@ -70,10 +70,10 @@ mysql> select User, Host from mysql.user;
 5 rows in set (0.001 sec)
 
 # now add permissions to that user
-create user ‘mmuser’@’%’ identified by ‘{mmuser-password}’;.
+create user ‘mmuser’@’%’ identified by ‘{mmuser-password}’;
 MariaDB [(none)]> create user 'mmuser'@'%'identified by 'password123'; 
 
-# grant permission to mmuser
+# grant permission to mmuser (This can be tweaked for more security)
 grant all privileges on mattermost.* to 'mmuser'@'%';
 
 exit
