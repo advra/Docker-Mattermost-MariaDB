@@ -3,27 +3,32 @@
 version: "2.4"
 
 services:
-  postgres:
-    container_name: postgres_mattermost
-    image: postgres:${POSTGRES_IMAGE_TAG}
+  mariadb:
+    container_name: mariadb_mattermost
+    image: mariadb:latest
     restart: ${RESTART_POLICY}
     security_opt:
       - no-new-privileges:true
     pids_limit: 100
-    read_only: true
+    # read_only: true
     tmpfs:
       - /tmp
-      - /var/run/postgresql
+      # - /var/run/postgresql
+      # - /var/lib/mysql
     volumes:
-      - ${POSTGRES_DATA_PATH}:/var/lib/postgresql/data
+      # - ${POSTGRES_DATA_PATH}:/var/lib/postgresql/data
+      - ${MARIADB_DATA_PATH}:/var/lib/mysql
     environment:
       # timezone inside container
       - TZ
-
-      # necessary Postgres options/variables
-      - POSTGRES_USER
-      - POSTGRES_PASSWORD
-      - POSTGRES_DB
+      - MARIADB_ROOT_PASSWORD=${MM_DB_ROOT_PASS}
+      - MARIADB_USER=${MM_USERNAME}
+      - MARIADB_PASSWORD=${MM_PASSWORD}
+      - MARIADB_DATABASE=${MM_DBNAME}
+      # # necessary Postgres options/variables
+      # - POSTGRES_USER
+      # - POSTGRES_PASSWORD
+      # - POSTGRES_DB
 
   mattermost:
     depends_on:
