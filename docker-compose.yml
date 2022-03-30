@@ -32,7 +32,7 @@ services:
 
   mattermost:
     depends_on:
-      - postgres
+      - mariadb
     container_name: mattermost
     image: mattermost/${MATTERMOST_IMAGE}:${MATTERMOST_IMAGE_TAG}
     restart: ${RESTART_POLICY}
