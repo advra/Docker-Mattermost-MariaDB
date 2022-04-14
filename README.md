@@ -90,3 +90,7 @@ exit
 - May consider forwarding firewall check out https://mariadb.com/kb/en/configuring-mariadb-for-remote-client-access/
 - Disabling Https for internal orgs without need of SSL check out https://github.com/mattermost/docker/issues/87
 - LDAP is enterprise edition but can opt for gitlab for SSO
+
+# Debuging 
+- use `docker logs containername` ex. docker logs mattermost
+- if container restarts constantly go into it and check config settings with `docker run -it mattermost/mattermost-team-edition:6.5 /bin/sh`
